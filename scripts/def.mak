@@ -10,9 +10,9 @@ include $(PRJ_ROOT)/Makefile.conf
 # Path
 PRJ_ABS_ROOT:=$(shell cd $(PRJ_ROOT) && pwd)
 
-OBJ_PARENT_ROOT:=$(PRJ_ROOT)/.obj/$(ARCH_PLATFORM)
+OBJ_PARENT_ROOT:=$(PRJ_ROOT)/build/obj/$(ARCH_PLATFORM)
 OBJ_ROOT:=$(OBJ_PARENT_ROOT)/$(MOD_NAME)
-OUTPUT_ROOT:=$(PRJ_ROOT)/.output/$(ARCH_PLATFORM)
+OUTPUT_ROOT:=$(PRJ_ROOT)/build/output/$(ARCH_PLATFORM)
 
 DEP_FILE += $(patsubst %.o, %.d, $(OBJ))
 
@@ -46,14 +46,15 @@ endif
 CDEFS+= -DTARGET_$(ARCH_PLATFORM) -D__ARDUINO_X86__ -DARDUINO=153 
 
 
-OPENCV_LIBS:=-L$(PREFIX)/lib -ljpeg -lpng -lz -lopencv_core -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann
+OPENCV_LIBS:=-L$(PREFIX)/lib -ljpeg -ltbb -lz -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_videoio -lopencv_imgcodecs -lopencv_features2d -lopencv_calib3d -lopencv_objdetect  -lopencv_flann
 
 # Dependencies
 INCLUDES+= -I. \
 	   -I$(PRJ_ABS_ROOT) \
 	   -I$(PRJ_ABS_ROOT)/edisonlib/core/arduino \
 	   -I$(PRJ_ABS_ROOT)/edisonlib/libraries \
-	   -I$(PRJ_ABS_ROOT)/edisonlib/variants/edison_fab_c
+	   -I$(PRJ_ABS_ROOT)/edisonlib/variants/edison_fab_c \
+	   -I$(PREFIX)/include
 
 
 DEP_LIBS+= -lm \

@@ -5,7 +5,13 @@
 
 # NOTE: do not alter the order of the folders, they are arranged based on the dependencies
 SUBDIRS:= edisonlib \
-          blinktest 
+          oled_dispatcher \
+	  oled_render \
+          blinktest \
+	  usbdisp_tester \
+	  camera_tester \
+	  cam2oled \
+	  facetrack
 
 
 .PHONY: all clean install listsubs
